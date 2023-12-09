@@ -1,10 +1,11 @@
 import gc
+from typing import Union
 
 import numpy as np
 from scipy import sparse as sp
 
 
-def get_squared_norms_along_compressed_axis(A: sp.csc_matrix) -> np.ndarray:
+def get_squared_norms_along_compressed_axis(A: Union[sp.csr_matrix, sp.csc_matrix]) -> np.ndarray:
     """
     Computes squared row (column) 2-norms of a CSR (CSC) matrix A.
     :param A: CSR (or CSC) matrix
@@ -19,7 +20,7 @@ def get_squared_norms_along_compressed_axis(A: sp.csc_matrix) -> np.ndarray:
     return squared_norms
 
 
-def get_norms_along_compressed_axis(A: sp.csc_matrix) -> np.ndarray:
+def get_norms_along_compressed_axis(A: Union[sp.csr_matrix, sp.csc_matrix]) -> np.ndarray:
     """
     Computes row (column) 2-norms of a CSR (CSC) matrix A.
     :param A: CSR (or CSC) matrix
