@@ -1,2 +1,2 @@
 # scipy-csmu
-small collection of utilities for SciPy's compressed sparse matrices
+small collection of **c**ompressed **s**parse **m**atrix **u**tilities based on SciPy
