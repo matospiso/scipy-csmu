@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scipy-csmu"
+version = "0.1.0"
+dependencies = [
+    "numpy >= 1.21.0",
+    "scipy >= 1.8.0",
+]
+requires-python = ">= 3.9"
+authors = [
+    {name = "Martin Spisak", email = "masp430@gmail.com"},
+]
+maintainers = [
+    {name = "Martin Spisak", email = "masp430@gmail.com"},
+]
+description = "small collection of compressed sparse matrix utilities based on SciPy"
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["scipy", "sparse matrix", "csr"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python",
+    "Intended Audience :: Developers",
+]
+
+[project.urls]
+Homepage = "https://github.com/matospiso/scipy-csmu"
+Repository = "https://github.com/matospiso/scipy-csmu.git"
+Issues = "https://github.com/matospiso/scipy-csmu/issues"
+
+[project.optional-dependencies]
+mkl = ["sparse_dot_mkl"]
