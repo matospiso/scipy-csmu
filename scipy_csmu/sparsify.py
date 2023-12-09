@@ -18,7 +18,7 @@ def inplace_sparsify(A: Union[sp.csr_matrix, sp.csc_matrix], target_density: flo
     """
     Sparsify a sparse matrix to target density by keeping only entries largest in magnitude.
     :param A: sparse matrix
-    :param target_density: target density
+    :param target_density: 0 <= target density <= 1
     :return: None
     """
     density = A.nnz / (A.shape[0] * A.shape[1])
@@ -27,7 +27,7 @@ def inplace_sparsify(A: Union[sp.csr_matrix, sp.csc_matrix], target_density: flo
         keep_quantile = 1 - target_density / density
         tol = np.quantile(np.abs(A.data), keep_quantile)
         # drop small values
-        A.data[np.abs(A.data) < tol] = 0
+        A.data[np.abs(A.data) <= tol] = 0
         # remove explicit zeros
         A.eliminate_zeros()
 
