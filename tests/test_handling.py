@@ -17,28 +17,32 @@ CSR = sp.csr_matrix((VALUES.ravel(), INDICES.ravel(), np.array([0, 5, 10, 15])),
 
 class TestSparseVectorFromIndicesAndValues(unittest.TestCase):
     def test_csr(self):
-        csr = sparse_vector_from_indices_and_values(INDICES[0], VALUES[0])
+        csr = sparse_vector_from_indices_and_values(INDICES[0], VALUES[0], 7)
         np.testing.assert_array_equal(csr.indptr, CSR[0, :].indptr)
         np.testing.assert_array_equal(csr.indices, CSR[0, :].indices)
         np.testing.assert_array_equal(csr.data, CSR[0, :].data)
+        assert csr.shape == (1, 7)
 
     def test_csc(self):
-        csc = sparse_vector_from_indices_and_values(INDICES[0], VALUES[0], column=True)
+        csc = sparse_vector_from_indices_and_values(INDICES[0], VALUES[0], 7, column=True)
         np.testing.assert_array_equal(csc.indptr, CSR[0, :].T.indptr)
         np.testing.assert_array_equal(csc.indices, CSR[0, :].T.indices)
         np.testing.assert_array_equal(csc.data, CSR[0, :].T.data)
+        assert csc.shape == (7, 1)
 
 
 class TestSparseVectorToIndicesAndValues(unittest.TestCase):
     def test_csr(self):
-        indices, values = sparse_vector_to_indices_and_values(CSR[0, :])
+        indices, values, dimension = sparse_vector_to_indices_and_values(CSR[0, :])
         np.testing.assert_array_equal(indices, INDICES[0])
         np.testing.assert_array_equal(values, VALUES[0])
+        assert dimension == 7
 
     def test_csc(self):
-        indices, values = sparse_vector_to_indices_and_values(CSR[0, :].T)
+        indices, values, dimension = sparse_vector_to_indices_and_values(CSR[0, :].T)
         np.testing.assert_array_equal(indices, INDICES[0])
         np.testing.assert_array_equal(values, VALUES[0])
+        assert dimension == 7
 
 
 class TestSplitCompressedData(unittest.TestCase):
